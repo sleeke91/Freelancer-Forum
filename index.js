@@ -13,7 +13,7 @@ const NUM_FREELANCERS = 100;
 
 // Write a function that returns a freelancer object with a randomly generated name, occupation, and rate according to the provided constants.
 const makeFreelancerObject = ()=>{
-    const freeLancer = {}
+    const freeLancer = {} //name of the object being returned
     // get a randomNum for the names Array
     const randomNameNum = Math.floor(Math.random()*NAMES.length)
     const randomName = NAMES[randomNameNum]
@@ -23,9 +23,8 @@ const makeFreelancerObject = ()=>{
     const randomOccupation = OCCUPATIONS[randomOccNum]
     freeLancer.occupation = randomOccupation
     // get a randomNum for the Price_Range Array *****STUCK*****
-    const randomRateNum = Math.floor(Math.random()*PRICE_RANGE.length)
-    const randomRate = PRICE_RANGE[randomRateNum]
-    freeLancer.rate = randomRate
+    const randomRateNum = Math.floor(Math.random()*(PRICE_RANGE.max-PRICE_RANGE.min + 1) + PRICE_RANGE.min)
+    freeLancer.rate = randomRateNum
     return freeLancer
 }
 console.log(makeFreelancerObject())
@@ -43,22 +42,12 @@ function createRandomFreelancersArr(){
   console.log(freelancerStateArray)
 
 // Write a function that returns the average rate of all freelancers in state.
-function getSum(freelancerStateArray) {
-    let sum = 0
-    for(let i=0; i<freelancerStateArray.PRICE_RANGE;i++){
-     sum = sum + freelancerStateArray.PRICE_RANGE[i]
-    }
-    return sum
-  }
-
-function getaverageRate (freelancerStateArray){
-    const sum = getSum(freelancerStateArray)
-    const length = NUM_FREELANCERS
-  
-    return (sum/length)
-}
-
-console.log(getaverageRate())
+//use reduce method to add the sum of the 'rate' values then divide by length of the freelancerStateArray
+const getRateAverage = () => {
+  const myAverage = freelancerStateArray.reduce((accumulator, currentValue) => accumulator + currentValue["rate"], 0) / freelancerStateArray.length
+  return myAverage
+} 
+console.log(getRateAverage())
 
 // Use that function to initialize a state variable which will store the average rate of all freelancers.
 
