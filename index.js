@@ -50,11 +50,62 @@ const getRateAverage = () => {
 console.log(getRateAverage())
 
 // Use that function to initialize a state variable which will store the average rate of all freelancers.
+const averageRateofAllFreelancers = getRateAverage()
+console.log(averageRateofAllFreelancers)
 
 // Write a component function to represent a single freelancer.
+const createFreelancer = (freelancer) => {
+    //create elements for each item (name, occupation, rate)
+    const createdFreelancer = document.createElement("div")
+    const singleFreelancerName = document.createElement("div")
+    const singleFreelancerOccupation = document.createElement("div")
+    const singleFreelancerRate = document.createElement("div")
+    //set at class for each created div
+    createdFreelancer.className = "eachFreelancer"
+    singleFreelancerName.className = "eachName"
+    singleFreelancerOccupation.className = "eachOccupation"
+    singleFreelancerRate.className = "eachRate"
+    //create text
+    singleFreelancerName.textContent = `Name: ${freelancer.name}`
+    singleFreelancerOccupation.textContent = `Occupation: ${freelancer.occupation}`
+    singleFreelancerRate.textContent = `Rate: $${freelancer.rate}`
+    //style everything
+    createdFreelancer.style.border = "1px solid"
+    createdFreelancer.style.margin = "5px"
+    createdFreelancer.style.backgroundColor = "pink"
+    //add children (name, occupation, rate div's) to parent (createdFreelancer div)
+    createdFreelancer.appendChild(singleFreelancerName)
+    createdFreelancer.appendChild(singleFreelancerOccupation)
+    createdFreelancer.appendChild(singleFreelancerRate)
+    return createdFreelancer
+  }
 
 // Write a component function to represent an array of freelancers.
-
+const freelancerContainer = document.getElementById("app")
+function createmultFreelancers (){
+    const freelancersArray = freelancerStateArray.map((freelancer)=>{return createFreelancer(freelancer)})
+    freelancersArray.forEach((freelancerObject)=>{
+      freelancerContainer.appendChild(freelancerObject)
+  })
+  }
 // Write a component function to represent the average rate of all freelancers.
+const createAverage = (freelancersAverage) => {
+    const createdAverage = document.createElement("h3")
+    createdAverage.className = "average"
+    createdAverage.textContent = `Average Rate: $${averageRateofAllFreelancers}`
+    createdAverage.style.fontStyle = 'italic'
+    return createdAverage
+}
 
 // Write and call a render function that will mount the application onto the document.
+const render = () => {
+    const heading = document.createElement("h1")
+    heading.textContent = "Freelancer Forum"
+    heading.style.color = "#e68a9a"
+    freelancerContainer.appendChild(heading)
+    freelancerContainer.appendChild(createAverage())
+    createmultFreelancers()
+    
+}
+
+render()
